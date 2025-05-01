@@ -12,4 +12,5 @@
 - https://blog.naver.com/yeondata/223851519988
 
 # 📝 참고
-- https://adjh54.tistory.com/292
+- https://adjh54.tistory.com/292 (basic)
+- https://adjh54.tistory.com/497?category=1187853
