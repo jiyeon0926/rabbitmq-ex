@@ -4,7 +4,8 @@
 - RabbitMQ
 
 # 📨 RabbitMQ
-- Port : 15672
+- AMQP Port : 5672
+- 대시보드 Port : 15672
 
 ### 🗂️ 내용 정리
 - https://blog.naver.com/yeondata/223851493671
