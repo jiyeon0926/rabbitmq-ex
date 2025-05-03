@@ -18,6 +18,23 @@ Consumer가 없다면❓
 - 메시지는 Queue에 저장된 채로 대기
 - 수신자는 메시지를 받을 수 없음
 
+![img.png](img/흐름.png)
+
+### 💡 Exchange 종류
+- Direct Exchange
+    - 정확히 일치하는 라우팅 키를 가진 큐에만 메시지를 전달
+    - ex) 1:1 채팅
+- Fanout Exchange
+    - 라우팅 키와 관계없이 연결된 모든 큐로 브로드캐스트
+    - ex) 공지, 전체 알림
+- Topic Exchange
+    - 패턴 매칭 기반
+    - `*` 또는 `#` 사용
+    - ex) 그룹별 메시지
+- Headers Exchange
+    - 라우팅 키 대신 헤더 속성 값을 기반으로 라우팅
+    - ex) 사용자 속성에 따른 메시지 전송
+
 ### 🗂️ 내용 정리
 - https://blog.naver.com/yeondata/223851493671
 - https://blog.naver.com/yeondata/223851519988
