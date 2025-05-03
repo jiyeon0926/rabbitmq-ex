@@ -25,4 +25,19 @@ public class ProducerServiceImpl implements ProducerService {
             log.error("파싱 오류 발생");
         }
     }
+
+    @Override
+    public void topicSendMessage(MessageDto messageDto) {
+
+    }
+
+    @Override
+    public void fanoutSendMessage(MessageDto messageDto) {
+
+    }
+
+    @Override
+    public void headersSendMessage(MessageDto messageDto) {
+
+    }
 }
