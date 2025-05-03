@@ -17,10 +17,9 @@ public class ProducerController {
 
     private final ProducerService producerService;
 
-    // 생산자(Producer)가 메시지를 전송
-    @PostMapping("/send")
-    public ResponseEntity<String> sendMessage(@RequestBody MessageDto messageDto) {
-        producerService.sendMessage(messageDto);
+    @PostMapping("/direct")
+    public ResponseEntity<String> directSendMessage(@RequestBody MessageDto messageDto) {
+        producerService.directSendMessage(messageDto);
 
         return new ResponseEntity<>("메시지 전송 성공", HttpStatus.OK);
     }
