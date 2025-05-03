@@ -16,11 +16,11 @@ public class ProducerServiceImpl implements ProducerService {
     private final RabbitTemplate rabbitTemplate;
 
     @Override
-    public void sendMessage(MessageDto messageDto) {
+    public void directSendMessage(MessageDto messageDto) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             String objectToJSON = objectMapper.writeValueAsString(messageDto);
-            rabbitTemplate.convertAndSend("hello.exchange", "hello.key", objectToJSON);
+            rabbitTemplate.convertAndSend("exchange.direct", "hello.key", objectToJSON);
         } catch (JsonProcessingException e) {
             log.error("파싱 오류 발생");
         }

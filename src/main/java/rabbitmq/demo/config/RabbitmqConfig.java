@@ -28,33 +28,28 @@ public class RabbitmqConfig {
     @Value("${spring.rabbitmq.password}")
     private String password;
 
-    /**
-     * "hello.exchange" 라는 이름으로 Direct Exchange 구성
-     * @return DirectExchange
-     */
     @Bean
     DirectExchange directExchange() {
-        return new DirectExchange("hello.exchange");
+        return new DirectExchange("exchange.direct");
     }
 
-    /**
-     * "hello.queue" 라는 이름으로 큐를 구성
-     * @return Queue
-     */
     @Bean
-    Queue queue() {
-        return new Queue("hello.queue", false);
+    Queue queue1() {
+        return new Queue("queue1", false);
     }
 
     /**
      * 큐와 DirectExchange를 바인딩
      * @param directExchange
-     * @param queue
+     * @param queue1
      * @return "hello.key" 라는 이름으로 바인딩된 Binding 객체
      */
     @Bean
-    Binding binding(DirectExchange directExchange, Queue queue) {
-        return BindingBuilder.bind(queue).to(directExchange).with("hello.key");
+    Binding directBinding(DirectExchange directExchange, Queue queue1) {
+        return BindingBuilder
+                .bind(queue1)
+                .to(directExchange)
+                .with("hello.key");
     }
 
     // RabbitMQ와 연결

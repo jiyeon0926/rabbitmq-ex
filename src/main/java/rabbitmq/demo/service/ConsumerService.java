@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 public class ConsumerService {
 
     // 전달받은 데이터를 수신
-    @RabbitListener(queues = "hello.queue")
+    @RabbitListener(queues = "queue1")
     public void receiveMessage(String message) {
         log.info("결과: {}", message);
     }
