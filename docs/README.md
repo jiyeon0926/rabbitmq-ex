@@ -38,6 +38,7 @@ Consumer가 없다면❓
 ### 🗂️ 내용 정리
 - https://blog.naver.com/yeondata/223851493671
 - https://blog.naver.com/yeondata/223851519988
+- https://blog.naver.com/yeondata/223854837629 (Exchange 유형별 정리)
 
 # 📝 참고
 - https://adjh54.tistory.com/292 (basic)
