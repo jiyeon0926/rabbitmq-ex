@@ -1,9 +1,6 @@
 package rabbitmq.demo.config;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -28,6 +25,7 @@ public class RabbitmqConfig {
     @Value("${spring.rabbitmq.password}")
     private String password;
 
+    // DirectExchange
     @Bean
     DirectExchange directExchange() {
         return new DirectExchange("exchange.direct");
@@ -38,12 +36,6 @@ public class RabbitmqConfig {
         return new Queue("queue1", false);
     }
 
-    /**
-     * 큐와 DirectExchange를 바인딩
-     * @param directExchange
-     * @param queue1
-     * @return "hello.key" 라는 이름으로 바인딩된 Binding 객체
-     */
     @Bean
     Binding directBinding(DirectExchange directExchange, Queue queue1) {
         return BindingBuilder
@@ -52,7 +44,88 @@ public class RabbitmqConfig {
                 .with("hello.key");
     }
 
-    // RabbitMQ와 연결
+    // TopicExchange
+    @Bean
+    TopicExchange topicExchange() {
+        return new TopicExchange("exchange.topic");
+    }
+
+    @Bean
+    Queue queue2() {
+        return new Queue("queue2", false);
+    }
+
+    @Bean
+    Queue queue3() {
+        return new Queue("queue3", false);
+    }
+
+    @Bean
+    Binding topicBinding1(TopicExchange topicExchange, Queue queue2) {
+        return BindingBuilder
+                .bind(queue2)
+                .to(topicExchange)
+                .with("rabbit.*.key");
+    }
+
+    @Bean
+    Binding topicBinding2(TopicExchange topicExchange, Queue queue3) {
+        return BindingBuilder
+                .bind(queue3)
+                .to(topicExchange)
+                .with("rabbit.#.key");
+    }
+
+    // FanoutExchange
+    @Bean
+    FanoutExchange fanoutExchange() {
+        return new FanoutExchange("exchange.fanout");
+    }
+
+    @Bean
+    Queue queue4() {
+        return new Queue("queue4", false);
+    }
+
+    @Bean
+    Queue queue5() {
+        return new Queue("queue5", false);
+    }
+
+    @Bean
+    Binding fanoutBinding1(FanoutExchange fanoutExchange, Queue queue4) {
+        return BindingBuilder
+                .bind(queue4)
+                .to(fanoutExchange);
+    }
+
+    @Bean
+    Binding fanoutBinding2(FanoutExchange fanoutExchange, Queue queue5) {
+        return BindingBuilder
+                .bind(queue5)
+                .to(fanoutExchange);
+    }
+
+    // HeadersExchange
+    @Bean
+    HeadersExchange headersExchange() {
+        return  new HeadersExchange("exchange.headers");
+    }
+
+    @Bean
+    Queue queue6() {
+        return new Queue("queue6", false);
+    }
+
+    @Bean
+    Binding headersBinding(HeadersExchange headersExchange, Queue queue6) {
+        return BindingBuilder
+                .bind(queue6)
+                .to(headersExchange)
+                .where("x-api-key") // Header 내에 "x-api-key" 라는 값이 존재하는 경우
+                .exists();
+    }
+
     @Bean
     ConnectionFactory connectionFactory() {
         CachingConnectionFactory connectionFactory = new CachingConnectionFactory();
