@@ -30,4 +30,11 @@ public class ProducerController {
 
         return new ResponseEntity<>("메시지 전송 성공", HttpStatus.OK);
     }
+
+    @PostMapping("/fanout")
+    public ResponseEntity<String> fanoutSendMessage(@RequestBody MessageDto messageDto) {
+        producerService.fanoutSendMessage(messageDto);
+
+        return new ResponseEntity<>("메시지 전송 성공", HttpStatus.OK);
+    }
 }

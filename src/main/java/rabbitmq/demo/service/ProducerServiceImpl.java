@@ -39,7 +39,13 @@ public class ProducerServiceImpl implements ProducerService {
 
     @Override
     public void fanoutSendMessage(MessageDto messageDto) {
-
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String objectToJSON = objectMapper.writeValueAsString(messageDto);
+            rabbitTemplate.convertAndSend("exchange.fanout", "", objectToJSON);
+        } catch (JsonProcessingException jpe) {
+            System.out.println("파싱 오류 발생");
+        }
     }
 
     @Override
