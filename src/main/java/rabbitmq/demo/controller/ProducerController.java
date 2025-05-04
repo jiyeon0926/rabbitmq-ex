@@ -23,4 +23,11 @@ public class ProducerController {
 
         return new ResponseEntity<>("메시지 전송 성공", HttpStatus.OK);
     }
+
+    @PostMapping("/topic")
+    public ResponseEntity<String> topicSendMessage(@RequestBody MessageDto messageDto) {
+        producerService.topicSendMessage(messageDto);
+
+        return new ResponseEntity<>("메시지 전송 성공", HttpStatus.OK);
+    }
 }

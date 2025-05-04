@@ -24,13 +24,13 @@ Consumer가 없다면❓
 - Direct Exchange
     - 정확히 일치하는 라우팅 키를 가진 큐에만 메시지를 전달
     - ex) 1:1 채팅
+- Topic Exchange
+  - 패턴 매칭 기반
+  - `*` 또는 `#` 사용
+  - ex) 그룹별 메시지
 - Fanout Exchange
     - 라우팅 키와 관계없이 연결된 모든 큐로 브로드캐스트
     - ex) 공지, 전체 알림
-- Topic Exchange
-    - 패턴 매칭 기반
-    - `*` 또는 `#` 사용
-    - ex) 그룹별 메시지
 - Headers Exchange
     - 라우팅 키 대신 헤더 속성 값을 기반으로 라우팅
     - ex) 사용자 속성에 따른 메시지 전송
