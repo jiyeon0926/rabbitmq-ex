@@ -33,7 +33,7 @@ public class ProducerServiceImpl implements ProducerService {
             String objectToJSON = objectMapper.writeValueAsString(messageDto);
             rabbitTemplate.convertAndSend("exchange.topic", "rabbit.test.key", objectToJSON);
         } catch (JsonProcessingException jpe) {
-            System.out.println("파싱 오류 발생");
+            log.error("파싱 오류 발생");
         }
     }
 
@@ -44,12 +44,18 @@ public class ProducerServiceImpl implements ProducerService {
             String objectToJSON = objectMapper.writeValueAsString(messageDto);
             rabbitTemplate.convertAndSend("exchange.fanout", "", objectToJSON);
         } catch (JsonProcessingException jpe) {
-            System.out.println("파싱 오류 발생");
+            log.error("파싱 오류 발생");
         }
     }
 
     @Override
     public void headersSendMessage(MessageDto messageDto) {
-
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            String objectToJSON = objectMapper.writeValueAsString(messageDto);
+            rabbitTemplate.convertAndSend("exchange.headers", "", objectToJSON);
+        } catch (JsonProcessingException jpe) {
+            log.error("파싱 오류 발생");
+        }
     }
 }

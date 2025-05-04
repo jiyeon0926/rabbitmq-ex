@@ -37,4 +37,11 @@ public class ProducerController {
 
         return new ResponseEntity<>("메시지 전송 성공", HttpStatus.OK);
     }
+
+    @PostMapping("/headers")
+    public ResponseEntity<String> headersSendMessage(@RequestBody MessageDto messageDto) {
+        producerService.headersSendMessage(messageDto);
+
+        return new ResponseEntity<>("메시지 전송 성공", HttpStatus.OK);
+    }
 }
