@@ -10,5 +10,5 @@ public interface ProducerService {
 
     void fanoutSendMessage(MessageDto messageDto);
 
-    void headersSendMessage(MessageDto messageDto);
+    void headersSendMessage(MessageDto messageDto, String header);
 }

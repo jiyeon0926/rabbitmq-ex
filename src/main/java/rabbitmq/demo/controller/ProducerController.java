@@ -1,5 +1,6 @@
 package rabbitmq.demo.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,8 +40,10 @@ public class ProducerController {
     }
 
     @PostMapping("/headers")
-    public ResponseEntity<String> headersSendMessage(@RequestBody MessageDto messageDto) {
-        producerService.headersSendMessage(messageDto);
+    public ResponseEntity<String> headersSendMessage(@RequestBody MessageDto messageDto,
+                                                     HttpServletRequest request) {
+        String header = request.getHeader("x-api-key");
+        producerService.headersSendMessage(messageDto, header);
 
         return new ResponseEntity<>("메시지 전송 성공", HttpStatus.OK);
     }
