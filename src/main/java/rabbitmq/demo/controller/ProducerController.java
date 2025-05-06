@@ -1,5 +1,6 @@
 package rabbitmq.demo.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +18,32 @@ public class ProducerController {
 
     private final ProducerService producerService;
 
-    // 생산자(Producer)가 메시지를 전송
-    @PostMapping("/send")
-    public ResponseEntity<String> sendMessage(@RequestBody MessageDto messageDto) {
-        producerService.sendMessage(messageDto);
+    @PostMapping("/direct")
+    public ResponseEntity<String> directSendMessage(@RequestBody MessageDto messageDto) {
+        producerService.directSendMessage(messageDto);
+
+        return new ResponseEntity<>("메시지 전송 성공", HttpStatus.OK);
+    }
+
+    @PostMapping("/topic")
+    public ResponseEntity<String> topicSendMessage(@RequestBody MessageDto messageDto) {
+        producerService.topicSendMessage(messageDto);
+
+        return new ResponseEntity<>("메시지 전송 성공", HttpStatus.OK);
+    }
+
+    @PostMapping("/fanout")
+    public ResponseEntity<String> fanoutSendMessage(@RequestBody MessageDto messageDto) {
+        producerService.fanoutSendMessage(messageDto);
+
+        return new ResponseEntity<>("메시지 전송 성공", HttpStatus.OK);
+    }
+
+    @PostMapping("/headers")
+    public ResponseEntity<String> headersSendMessage(@RequestBody MessageDto messageDto,
+                                                     HttpServletRequest request) {
+        String header = request.getHeader("x-api-key");
+        producerService.headersSendMessage(messageDto, header);
 
         return new ResponseEntity<>("메시지 전송 성공", HttpStatus.OK);
     }

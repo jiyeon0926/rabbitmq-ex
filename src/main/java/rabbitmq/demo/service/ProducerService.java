@@ -4,6 +4,11 @@ import rabbitmq.demo.dto.MessageDto;
 
 public interface ProducerService {
 
-    // 메시지를 큐로 전송
-    void sendMessage(MessageDto messageDto);
+    void directSendMessage(MessageDto messageDto);
+
+    void topicSendMessage(MessageDto messageDto);
+
+    void fanoutSendMessage(MessageDto messageDto);
+
+    void headersSendMessage(MessageDto messageDto, String header);
 }
